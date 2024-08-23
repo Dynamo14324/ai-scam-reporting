@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Scam - AI-Powered Scam Reporting System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="report.html">Report Scam</a></li>
+                <li><a href="analyze.html">Analyze Report</a></li>
+                <li><a href="contact.html">Contact Authorities</a></li>
+                <li><a href="feedback.html">Feedback</a></li>
+                <li><a href="login.html">Login/Register</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="form-section">
+            <h1>Report a Scam</h1>
+            <form action="/report" method="post">
+                <label for="scam_type">Scam Type:</label>
+                <input type="text" id="scam_type" name="scam_type" required>
+                
+                <label for="report_date">Date of Incident:</label>
+                <input type="date" id="report_date" name="report_date" required>
+                
+                <label for="details">Details:</label>
+                <textarea id="details" name="details" rows="4" required></textarea>
+                
+                <button type="submit" class="cta-button">Submit Report</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 AI-Powered Scam Reporting System</p>
+    </footer>
+</body>
+</html>
