@@ -22,7 +22,7 @@
     <main>
         <section class="form-section">
             <h1>Report a Scam</h1>
-            <form action="/report" method="post">
+            <form action="" method="post">
                 <label for="scam_type">Scam Type:</label>
                 <select id="scam_type" name="scam_type" required>
                     <option value="" disabled selected>Select Scam Type</option>
@@ -38,10 +38,12 @@
                 <input type="date" id="report_date" name="report_date" required>
                 
                 <label for="details">Details:</label>
-                <textarea id="details" name="details" rows="8" required></textarea>
+                <!-- <textarea id="details" name="details" rows="8" required></textarea> -->
+                <input type="text" id="details">
                 
                 <button type="submit" class="cta-button">Submit Report</button>
             </form>
+            <div id="reposnse"></div>
         </section>
 
         <!-- New Section for AI-Generated Help -->
@@ -64,7 +66,7 @@
   }
 </script>
 
-    <script type="module">
+    <!-- <script type="module">
         import { GoogleGenerativeAI } from "@google/generative-ai";
 
         const API_KEY = "AIzaSyCzuE3cyayuW7IaPBK9nNCkLegeHr63Qbo";
@@ -86,6 +88,35 @@
                 console.error(error);
             }
         });
+    </script> -->
+    <script type="module">
+        import { GoogleGenerativeAI } from "@google/generative-ai";
+  
+        // Fetch your API_KEY
+        const API_KEY = "AIzaSyCzuE3cyayuW7IaPBK9nNCkLegeHr63Qbo";
+  
+        // Access your API key (see "Set up your API key" above)
+        const genAI = new GoogleGenerativeAI(API_KEY);
+  
+        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash"});
+
+        document.getElementById('details').addEventListener('input', async function() {
+            const details = this.value;
+            async function run() {
+                const prompt =`You are an AI-powered assistant integrated into a Scam Reporting System. Your goal is to help victims accurately report online scams by gathering and optimizing the information they provide. Guide the user through the process of reporting the scam, asking for details like the method of contact, the nature of the scam, and any interactions or transactions that occurred. Analyze the provided information, enhance clarity, identify key details, and ensure the report is comprehensive. Your ultimate task is to create an optimized report that can be securely submitted to the authorities for further investigation, empowering the user and strengthening their trust in the system. and give response as html not as markdown and i dont want form I just want scam information ${details}`
+
+                const result = await model.generateContent(prompt);
+                const response = await result.response;
+                const text = response.text();
+                document.getElementById("reposnse").innerHTML = text;
+                console.log(text);
+            }
+            run();
+
+        });
+
+        
+
     </script>
 </body>
 </html>
